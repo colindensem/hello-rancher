@@ -13,7 +13,7 @@ variables:
 
 before_script:
   - docker info
-  - docker login -u $CI_JOB_USER -p $CI_JOB_TOKEN quay.io
+  - docker login -u $CI_JOB_USER -p $CI_JOB_PASS quay.io
 
 
 build:
