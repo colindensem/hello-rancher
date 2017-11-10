@@ -1,10 +1,10 @@
 image: docker:latest
 services:
-  - docker:dind
-stage:
-  - build
-  - test
-  - release
+- docker:dind
+stages:
+- build
+- test
+- release
 
 variables:
   CONTAINER_TEST_IMAGE: registry.gitlab.com/colindensem/hello-rancher:$CI_COMMIT_REF_NAME
@@ -14,14 +14,11 @@ variables:
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+  - docker info
 
 
 build:
   stage: build
-
-  before_script:
-    - docker info
-
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
