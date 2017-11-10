@@ -26,6 +26,8 @@ build:
 
 test1:
   stage: test
+    services:
+    - docker:dind
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run $CONTAINER_TEST_IMAGE rake test
