@@ -1,5 +1,8 @@
 image: docker:latest
 
+services:
+- docker:dind
+
 stages:
 - build
 - test
@@ -18,16 +21,13 @@ before_script:
 
 build:
   stage: build
-  services:
-  - docker:dind
+
   script:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 test1:
   stage: test
-    services:
-    - docker:dind
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run $CONTAINER_TEST_IMAGE rake test
