@@ -13,6 +13,7 @@ variables:
 
 before_script:
   - docker info
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
 
 
 build:
@@ -20,7 +21,6 @@ build:
   services:
   - docker:dind
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
