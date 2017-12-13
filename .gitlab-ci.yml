@@ -7,7 +7,7 @@ stages:
 - build
 - test
 - release
-- deploy
+
 
 variables:
   CONTAINER_TEST_IMAGE: quay.io/colindensem/hello-rancher:$CI_COMMIT_REF_NAME
@@ -48,9 +48,3 @@ release-image:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - master
-
-deploy:
-  stage: deploy
-  image: cdrx/rancher-gitlab-deploy
-  script:
-    - upgrade --stack default --service sinatra
